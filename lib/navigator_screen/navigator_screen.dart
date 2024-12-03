@@ -20,13 +20,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.count} ページ'),
-        leading: widget.count == 1 // 1ページ目は戻るボタン非表示
-            ? null
-            : IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.arrow_back_ios_new),
-              ),
+        title: Text(NavigatorScreens.index.title),
       ),
       body: SafeArea(
         child: Padding(
@@ -38,7 +32,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
               Expanded(
                 child: Center(
                   child: Text(
-                    NavigatorScreens.index.title,
+                    '${widget.count} ページ',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),

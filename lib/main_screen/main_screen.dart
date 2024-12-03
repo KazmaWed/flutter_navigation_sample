@@ -12,7 +12,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  // BottomAppBarの選択中タブ
+  // BottomAppBarの選択中タブとItem
   var index = 0;
   final navigationBarItems = [
     BottomNavigationBarItem(
@@ -40,12 +40,23 @@ class _MainScreenState extends State<MainScreen> {
     ),
   ];
 
+  // タブ選択
+  void onTap(int value) {
+    if (index != value) {
+      setState(() => index = value);
+    } else {
+      Navigator.of(keys[index].currentContext!).popUntil(
+        (route) => !Navigator.of(keys[index].currentContext!).canPop(),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
-        onTap: (value) => setState(() => index = value),
+        onTap: onTap,
         items: navigationBarItems,
       ),
       body: IndexedStack(

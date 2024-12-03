@@ -24,16 +24,6 @@ class AppScreens implements AppDestinasion {
   static const setting = AppScreens('設定', '/setting');
 }
 
-// class MainScreens implements AppDestinasion {
-//   const MainScreens(this.title, this.path);
-//   @override
-//   final String title;
-//   @override
-//   final String path;
-
-//   static const index = MainScreens('メイン', '/index');
-// }
-
 class SettingScreens implements AppDestinasion {
   const SettingScreens(this.title, this.route);
   @override
@@ -51,7 +41,7 @@ class IncrementScreens implements AppDestinasion {
   @override
   final String route;
 
-  static const index = IncrementScreens('インクリメント', '/increment');
+  static const index = IncrementScreens('インクリメント', '/');
 }
 
 class NavigatorScreens implements AppDestinasion {
@@ -61,12 +51,12 @@ class NavigatorScreens implements AppDestinasion {
   @override
   final String route;
 
-  static const index = NavigatorScreens('ナビゲーター', '/navigator');
+  static const index = NavigatorScreens('ナビゲーター', '/');
 
   static AppDestinasion pathWithCount(int count) {
     return NavigatorScreens(
-      '$count ページ目',
-      '/navigator?count=$count',
+      index.title,
+      index.route + (count == 1 ? '' : '?count=$count'),
     );
   }
 }
