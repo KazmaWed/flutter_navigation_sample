@@ -1,12 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_navigator_sample/increment_screen/increment_screen.dart';
-import 'package:flutter_navigator_sample/login_screen/login_screen.dart';
-import 'package:flutter_navigator_sample/main_screen/main_screen.dart';
-import 'package:flutter_navigator_sample/setting_screen/setting_screen.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../navigator_screen/navigator_screen.dart';
-
 abstract class AppDestination {
   AppDestination(this.title, this.route);
   final String title;

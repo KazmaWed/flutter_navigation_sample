@@ -8,8 +8,6 @@ import '../route.dart';
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
-  static const route = "/main";
-
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();
 }
@@ -69,6 +67,12 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                     icon: const Icon(Icons.arrow_back_ios_new),
                   )
                 : null,
+            actions: [
+              IconButton(
+                onPressed: () => Navigator.of(context).pushNamed(SettingScreens.index.route),
+                icon: const Icon(Icons.settings),
+              ),
+            ],
             // automaticallyImplyLeading: uiState.canPop,
           ),
           bottomNavigationBar: BottomNavigationBar(

@@ -8,7 +8,7 @@ part 'shared_state_notifier.g.dart';
 @riverpod
 class SharedStateNotifier extends _$SharedStateNotifier {
   @override
-  SharedUiState build() => SharedUiState();
+  SharedUiState build() => const SharedUiState();
 
   void navigate(List<AppDestination> destinations) {
     state = state.copyWith(

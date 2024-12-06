@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
-  static const route = "/setting";
-
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
@@ -12,6 +10,8 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: const Text("設定")),
+    );
   }
 }
