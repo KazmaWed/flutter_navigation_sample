@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigator_sample/route.dart';
+import 'package:flutter_navigator_sample/shared_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(context, ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("ログイン"),
       ),
       body: Center(
         child: FilledButton(
-          // onPressed: () => context.go(AppScreens.main.path),
-          onPressed: () => Navigator.of(context).pushReplacementNamed(
-            AppScreens.main.route,
-          ),
+          onPressed: () {
+            ref
+                .watch(sharedStateNotifierProvider.notifier)
+                .navigate([IncrementScreens.index, NavigatorScreens.index]);
+            Navigator.of(context).pushReplacementNamed(AppScreens.main.route);
+          },
           child: const Text("ログイン"),
         ),
       ),

@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigator_sample/route.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class IncrementScreen extends StatefulWidget {
+class IncrementScreen extends ConsumerStatefulWidget {
   const IncrementScreen({super.key});
 
   @override
-  State<IncrementScreen> createState() => _IncrementScreenState();
+  ConsumerState<IncrementScreen> createState() => _IncrementScreenState();
 }
 
-class _IncrementScreenState extends State<IncrementScreen> {
+class _IncrementScreenState extends ConsumerState<IncrementScreen> {
   int count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(IncrementScreens.index.title),
-        automaticallyImplyLeading: false, // 戻るボタン非表示
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),

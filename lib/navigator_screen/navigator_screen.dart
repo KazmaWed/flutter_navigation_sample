@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigator_sample/route.dart';
+import 'package:flutter_navigator_sample/shared_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NavigatorScreen extends StatefulWidget {
+class NavigatorScreen extends ConsumerStatefulWidget {
   const NavigatorScreen({super.key, required this.count});
-
   final int count;
 
   static const route = "/navigator";
@@ -12,16 +13,13 @@ class NavigatorScreen extends StatefulWidget {
   static String titleWithScreen(int count) => '$count';
 
   @override
-  State<NavigatorScreen> createState() => _NavigatorScreenState();
+  ConsumerState<NavigatorScreen> createState() => _NavigatorScreenState();
 }
 
-class _NavigatorScreenState extends State<NavigatorScreen> {
+class _NavigatorScreenState extends ConsumerState<NavigatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(NavigatorScreens.index.title),
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -32,8 +30,11 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
               Expanded(
                 child: Center(
                   child: Text(
-                    '${widget.count} ページ',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    'ページ ${widget.count}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
               ),
@@ -41,9 +42,15 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FilledButton(
-                    onPressed: () => Navigator.of(context).pushNamed(
-                      NavigatorScreens.pathWithCount(widget.count + 1).route,
-                    ),
+                    onPressed: () {
+                      final destination = NavigatorScreens.pathWithCount(widget.count + 1);
+                      ref.watch(sharedStateNotifierProvider.notifier).navigateOnTab(destination, 1);
+                      Navigator.of(context).pushNamed(destination.route).then((_) {
+                        ref
+                            .watch(sharedStateNotifierProvider.notifier)
+                            .navigateOnTab(NavigatorScreens.pathWithCount(widget.count), 1);
+                      });
+                    },
                     child: const Text('次のページ'),
                   )
                 ],

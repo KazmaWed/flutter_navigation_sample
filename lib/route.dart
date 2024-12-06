@@ -3,16 +3,17 @@ import 'package:flutter_navigator_sample/increment_screen/increment_screen.dart'
 import 'package:flutter_navigator_sample/login_screen/login_screen.dart';
 import 'package:flutter_navigator_sample/main_screen/main_screen.dart';
 import 'package:flutter_navigator_sample/setting_screen/setting_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'navigator_screen/navigator_screen.dart';
 
-abstract class AppDestinasion {
-  AppDestinasion(this.title, this.route);
+abstract class AppDestination {
+  AppDestination(this.title, this.route);
   final String title;
   final String route;
 }
 
-class AppScreens implements AppDestinasion {
+class AppScreens implements AppDestination {
   @override
   final String title;
   @override
@@ -24,7 +25,7 @@ class AppScreens implements AppDestinasion {
   static const setting = AppScreens('設定', '/setting');
 }
 
-class SettingScreens implements AppDestinasion {
+class SettingScreens implements AppDestination {
   const SettingScreens(this.title, this.route);
   @override
   final String title;
@@ -34,7 +35,7 @@ class SettingScreens implements AppDestinasion {
   static const index = SettingScreens('設定', '/setting');
 }
 
-class IncrementScreens implements AppDestinasion {
+class IncrementScreens implements AppDestination {
   const IncrementScreens(this.title, this.route);
   @override
   final String title;
@@ -42,22 +43,39 @@ class IncrementScreens implements AppDestinasion {
   final String route;
 
   static const index = IncrementScreens('インクリメント', '/');
+
+  static AppDestination? fromRoute(String route) {
+    final uri = Uri.parse(route);
+    if (uri.path == IncrementScreens.index.route) {
+      return IncrementScreens.index;
+    }
+    return null;
+  }
 }
 
-class NavigatorScreens implements AppDestinasion {
+class NavigatorScreens implements AppDestination {
   const NavigatorScreens(this.title, this.route);
   @override
   final String title;
   @override
   final String route;
 
-  static const index = NavigatorScreens('ナビゲーター', '/');
+  static const index = NavigatorScreens('ページ 1', '/');
 
-  static AppDestinasion pathWithCount(int count) {
+  static AppDestination pathWithCount(int count) {
     return NavigatorScreens(
-      index.title,
+      'ページ $count',
       index.route + (count == 1 ? '' : '?count=$count'),
     );
+  }
+
+  static AppDestination? fromRoute(String route) {
+    final uri = Uri.parse(route);
+    if (uri.path == NavigatorScreens.index.route) {
+      final count = int.parse(uri.queryParameters['count'] ?? 1.toString());
+      return NavigatorScreens.pathWithCount(count);
+    }
+    return null;
   }
 }
 

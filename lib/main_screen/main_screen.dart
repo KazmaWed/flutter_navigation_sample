@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_navigator_sample/shared_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../route.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   static const route = "/main";
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   // BottomAppBarの選択中タブとItem
   var index = 0;
   final navigationBarItems = [
@@ -41,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   // タブ選択
-  void onTap(int value) {
+  void onTap(int value, WidgetRef ref) {
     if (index != value) {
       setState(() => index = value);
     } else {
@@ -53,16 +55,32 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
-        onTap: onTap,
-        items: navigationBarItems,
-      ),
-      body: IndexedStack(
-        index: index,
-        children: screens,
-      ),
+    final uiState = ref.watch(sharedStateNotifierProvider);
+
+    return Consumer(
+      builder: (context, ref, widget) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(uiState.currendScreens[index].title),
+            leading: uiState.canPop
+                ? IconButton(
+                    onPressed: () => Navigator.of(keys[index].currentContext!).pop(),
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                  )
+                : null,
+            // automaticallyImplyLeading: uiState.canPop,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: index,
+            onTap: (index) => onTap(index, ref),
+            items: navigationBarItems,
+          ),
+          body: IndexedStack(
+            index: index,
+            children: screens,
+          ),
+        );
+      },
     );
   }
 }
