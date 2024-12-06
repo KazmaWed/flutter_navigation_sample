@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigator_sample/shared_state_notifier.dart';
+import 'package:flutter_navigator_sample/notifier/shared_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../app_destination.dart';
+import '../model/app_destination.dart';
 
 class NavigatorScreen extends ConsumerStatefulWidget {
   const NavigatorScreen({super.key, required this.count});

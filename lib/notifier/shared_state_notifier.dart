@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'app_destination.dart';
+import '../model/app_destination.dart';
 import 'shared_ui_state.dart';
 
 part 'shared_state_notifier.g.dart';

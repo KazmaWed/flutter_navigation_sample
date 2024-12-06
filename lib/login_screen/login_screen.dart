@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../app_destination.dart';
-import '../shared_state_notifier.dart';
+import '../model/app_destination.dart';
+import '../notifier/shared_state_notifier.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});

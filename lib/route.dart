@@ -4,17 +4,13 @@ import 'package:flutter_navigator_sample/login_screen/login_screen.dart';
 import 'package:flutter_navigator_sample/main_screen/main_screen.dart';
 import 'package:flutter_navigator_sample/setting_screen/setting_screen.dart';
 
-import 'app_destination.dart';
+import 'model/app_destination.dart';
 import 'navigator_screen/navigator_screen.dart';
 
 final appRoutes = {
   AppScreens.login.route: (context) => const LoginScreen(),
   AppScreens.main.route: (context) => const MainScreen(),
   AppScreens.setting.route: (context) => const SettingScreen(),
-};
-
-final incrementScreenRoutes = {
-  IncrementScreens.index.route: (context) => const IncrementScreen(),
 };
 
 RouteFactory incrementScreenRouteFactory = (settings) {
