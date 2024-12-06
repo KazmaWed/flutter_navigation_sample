@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_navigator_sample/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'app_destination.dart';
+
 void main() {
   runApp(
     const ProviderScope(

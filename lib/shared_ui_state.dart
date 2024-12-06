@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'route.dart';
+import 'app_destination.dart';
 
 part 'shared_ui_state.freezed.dart';
 

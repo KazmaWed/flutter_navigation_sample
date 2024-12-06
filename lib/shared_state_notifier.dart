@@ -1,13 +1,14 @@
-import 'package:flutter_navigator_sample/route.dart';
-import 'package:flutter_navigator_sample/shared_ui_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'app_destination.dart';
+import 'shared_ui_state.dart';
 
 part 'shared_state_notifier.g.dart';
 
 @riverpod
 class SharedStateNotifier extends _$SharedStateNotifier {
   @override
-  SharedUiState build() => const SharedUiState();
+  SharedUiState build() => SharedUiState();
 
   void navigate(List<AppDestination> destinations) {
     state = state.copyWith(
